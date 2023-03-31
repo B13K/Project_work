@@ -1,4 +1,7 @@
-const { Router } = require("express")
+const { Router } = require("express");
+
+const userRouter = require("./userRouter");
+const rolRouter = require("./rolRouter");
 
 //Importar los router
 
@@ -7,7 +10,9 @@ const router = Router();
 
 
 //Configurar los routes
-//Ejemplo router.use("/user", userRouter);
+
+router.use("/user", userRouter)
+router.use("/rol", rolRouter)
 
 
 

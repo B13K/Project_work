@@ -1,10 +1,7 @@
 const { DataTypes } = require("sequelize")
 
-//Exportamos la funcion que define el modelo
-//Ñuego injectamos al conexion a sequelize
-
 module.exports = (sequelize) => {
-    sequelize.define("Rol", {
+    sequelize.define("Maquina", {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -12,7 +9,14 @@ module.exports = (sequelize) => {
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+        },
+        marca: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        modelo: {
+            type: DataTypes.STRING
         }
     }, {
         timestamps: false

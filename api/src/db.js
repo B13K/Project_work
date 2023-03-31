@@ -40,13 +40,23 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 
 // const { Dog, Temperament } = sequelize.models;
-
+const { User, Linea, Rol, Maquina } = sequelize.models; //Definimos
 
 
 
 // Aca vendrian las relaciones
 
-// Dog.belongsToMany(Temperament, {through: 'DogsTemperaments', timestamps: false});
+// Relacion de muchos a muchos entre la tabla User y Rol
+User.belongsToMany(Rol, {through: "UserRol", timestamps: false });
+Rol.belongsToMany(User, {through: "UserRol", timestamps: false })
+
+// Relacion de muchos a muchos entre la tabla User y Linea
+User.belongsToMany(Linea, { through: "UserLinea", timestamps: false});
+Linea.belongsToMany(User, { through: "UserLinea", timestamps: false});
+
+// Relacion de muchos a muchos entre la tabla Linea y Maquina
+Linea.belongsToMany(Maquina, { through: "LineaMaquina", timestamps: false});
+Maquina.belongsToMany(Linea, { through: "LineaMaquina", timestamps: false});
 
 
 
