@@ -5,6 +5,6 @@ const { conn } = require("./src/db.js")
     // conn.sync({force: true }).then(() => {
 conn.sync().then( () => {
     server.listen(3001, () => {
-        console.log("%s listening at 3001 +1")
+        console.log("%s listening at 3001")
     })
 })
