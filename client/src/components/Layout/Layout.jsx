@@ -1,68 +1,31 @@
 
-import NavBar from "../NavBar/NavBar.jsx"
-import { useAuth0 } from "@auth0/auth0-react";
-import axios from "axios";
-
 import style from "./Layout.module.css"
+import { Route, Routes, useLocation } from "react-router-dom";
+import NavBar from "../NavBar/NavBar.jsx"
+import Sidebar from "../Sidebar/Sidebar.jsx";
+
+import Login from "../../views/Login/Login"
+import SignUp from "../../views/SignUp/SignUp"
+import Dashboard from "../../views/Dashboard/Dashboard";
+import Profile from "../../views/Profile/Profile";
+import Configuration from "../../views/Configuration/Configuration.jsx"
 
 const Layout = () => {
 
-    const apiServerUrl = "http://localhost:3001"
-    const { user, getAccessTokenSilently } = useAuth0();
-
-    
-    
-    // const getAxios = async () => {
-    //     try {
-    //         const accessToken = await getAccessTokenSilently();
-    //         const groupData = await axios.get(`http://localhost:3001/login/private`, {
-    //           headers: {
-    //             Authorization: `bearer ${accessToken}`
-    //           }
-    //         });
-    //         console.log(groupData);
-    //       } catch (e) {
-    //         console.log(e.message);
-    //       }
-    
-    // }
-
-    // getAxios()
-
-      
-    const getToken = async () => {
-        try {
-            const token = await getAccessTokenSilently();
-            
-
-            console.log(token)
-
-            const config = {
-                url: `${apiServerUrl}/login/private`,
-                method: "GET",
-                headers: {
-                  "content-type": "application/json",
-                  "authorization": `Bearer ${token}`,
-                },
-              };
-            const response = await axios(config)
-            // {
-            //   headers: {
-            //     Authorization: `Bearer ${token}`,
-            //   },
-            // });
-            console.log(response);
-          } catch (error) {
-            console.error(error);
-          }
-    }
-
-    getToken();
+    // const [location, setLocation] = useState("")
+    const location = useLocation().pathname.split("/")[1] //Verifica que el path empiece con  /auth 
 
     return(
         <div className={style.layoutContainer}>
-            <NavBar/>
-            <h1>{JSON.stringify(user)}</h1>
+           {(location !== "auth") && <NavBar/>}
+            <Routes>
+                <Route path="/auth/login" element={<Login/>} />
+                <Route path="/auth/signup" element={<SignUp/>} />
+                <Route path="/" element={<Dashboard/>}/>
+                <Route path="/profile" element={<Profile/>} />
+                <Route path="/configuracion" element={<Configuration/>}/>
+            </Routes>
+            <Sidebar/>
         </div>
     )
 

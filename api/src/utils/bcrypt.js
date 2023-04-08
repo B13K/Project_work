@@ -12,7 +12,7 @@ const createHash = async(password) => {
 }
 
 const checkPassword = async (passwordDb, password) => {
-    const isCheck = await bcrypt.compare(passwordDb, password)
+    const isCheck = await bcrypt.compare(password, passwordDb)
     return isCheck;
 }
 

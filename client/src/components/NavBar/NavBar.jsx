@@ -1,18 +1,22 @@
 import style from "./NavBar.module.css"
-import { useAuth0 } from "@auth0/auth0-react"
+import { useDispatch, useSelector } from "react-redux"
+import MenuIcon from '@mui/icons-material/Menu';
+import { openSidebar } from "../../redux/actions"
 
-import LoginButton from "../LoginButton/LoginButton.jsx"
-import LogoutButton from "../logoutButton/logoutButton.jsx"
 
 const NavBar = () => {
+    const dispath = useDispatch();
 
-    const { isAuthenticated } = useAuth0();
-
+    const openSidebarHandler = () => {
+        dispath(openSidebar(true))
+    }
 
     return(
         <div className={style.navContainer}>
-            {isAuthenticated    ? <LogoutButton/>
-                                : <LoginButton/>}
+            <button onClick={openSidebarHandler} className={style.navBarButton}>
+                <MenuIcon />
+            </button>
+            <h1>Titulo y todo lo que quiero</h1>
         </div>
     )
 }

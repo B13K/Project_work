@@ -14,7 +14,7 @@ const router = Router();
 
 router.use("/user", userRouter)
 router.use("/rol", rolRouter)
-router.use("/login", loginRouter)
+router.use("/auth", loginRouter)
 
 
 
