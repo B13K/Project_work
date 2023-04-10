@@ -3,6 +3,7 @@ import logo from "../../../images/logo.png"
 import AlertDialog from "../../components/AlertDialog/AlertDialog"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
+import { useNavigate} from "react-router-dom"
 import { signUp } from "../../redux/actions"
 import { signUpService } from "../../services/message.service";
 import { Button, TextField} from "@mui/material";
@@ -22,6 +23,7 @@ const SignUp = () => {
     const [error, setError] = useState("")
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const onOpenHandler = () => {
         setOpen(false)
@@ -46,8 +48,14 @@ const SignUp = () => {
         }
         dispatch(signUp(data.data.user))
         localStorage.setItem("token", data.data.token)
+        loscalStorage.setItem("user", data.data.user)
         setUserForm(initialUser)
+        navigate("/dashboard")
 
+    }
+
+    const onNavigateLogin = () => {
+        navigate("/auth/login")
     }
     return (
         <div className={style.signUpContainer}>
@@ -62,8 +70,11 @@ const SignUp = () => {
                         <TextField label="Password" name="password" type="password" value={userForm.password} onChange={onChangeHandler}/>
                         <TextField label="Alias" name="nickname" type="text" value={userForm.nickname} onChange={onChangeHandler}/>
                     </form>
-                </div>                
-                <Button variant="contained" onClick={signUpSubmit}>Registrar</Button>
+                </div>
+                <div className={style.signUpButtons}>
+                    <Button variant="contained" onClick={onNavigateLogin}>Login</Button>
+                    <Button variant="contained" onClick={signUpSubmit}>Registrar</Button>
+                </div>
             </div>
             <AlertDialog 
             title="Error"

@@ -1,0 +1,63 @@
+
+.loginContainer {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    flex-wrap: wrap;
+}
+
+.loginCard {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0.2rem 0.2rem 0.2rem black;
+    padding-bottom: 1rem;
+}
+
+.loginTitle {
+    margin: 0;
+    position: absolute;
+    top: -1rem;
+    background-color: rgb(233, 138, 184);
+    padding: 0.2rem;
+    border-radius: 1rem;
+}
+
+.loginBody {
+    /* background-color: red; */
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5rem;
+    padding-bottom: 1rem;
+    align-items: center;
+    justify-content: space-around;
+    gap: 4rem;
+}
+
+.loginLogo {
+    width: 150px;    
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.loginButtons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 3rem;
+}
+
+.loginButtons Button{
+    border-radius: 1rem;
+}

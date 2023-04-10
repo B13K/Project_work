@@ -1,5 +1,8 @@
+import style from "./Login.module.css"
+import logo from "../../../images/logo.png"
 import {useState} from "react"
 import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
 // import {useDispatch, use} from "react-dom"
 import TextField from '@mui/material/TextField';
 import { Button, Link } from "@mui/material";
@@ -21,6 +24,7 @@ const Login = () => {
 
     
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     const handleClose = () => {
         setDialogOpen(false)
@@ -43,28 +47,43 @@ const Login = () => {
             return
         }
         dispatch(login(data.data.user))
-        localStorage.setItem("token", data.data.token)
+        let user = {...data.data.user}
+        localStorage.setItem("token", JSON.stringify(data.data.token))
+        localStorage.setItem("user", JSON.stringify(user))
         setLoginForm(initialLogin)
+        navigate("/dashboard") //Para regresar al inicio despues del login
+    }
+
+    const onNavigateSignUp = () => {
+        navigate("/auth/signup")
     }
 
     return (
-        <div>
-            <form onSubmit={loginSubmit}>
-                <TextField label="Email"
-                            type="text"
-                            name="email"
-                            value={loginForm.email}
-                            onChange={loginChange}>                    
-                </TextField>
-                <TextField label="Password"
-                            type="password"
-                            name="password"
-                            value={loginForm.password}
-                            onChange={loginChange}>                    
-                </TextField>
-                <Button type="submit" variant="contained"> Login</Button>
-                
-            </form>
+        <div className={style.loginContainer}>
+            <div className={style.loginCard}>
+                <h1 className={style.loginTitle}>Project Work</h1>
+                <div className={style.loginBody}>
+                    <img src={logo} alt="logo de la pagina" className={style.loginLogo}/>
+                    <form  className={style.loginForm}>
+                        <TextField label="Email"
+                                    type="text"
+                                    name="email"
+                                    value={loginForm.email}
+                                    onChange={loginChange}>                    
+                        </TextField>
+                        <TextField label="Password"
+                                    type="password"
+                                    name="password"
+                                    value={loginForm.password}
+                                    onChange={loginChange}>                    
+                        </TextField>
+                    </form>
+                </div>
+                <div className={style.loginButtons}>
+                    <Button variant="contained" onClick={onNavigateSignUp}>Registrar</Button>
+                    <Button variant="contained" onClick={loginSubmit}>Login</Button>
+                </div>
+            </div>
             <AlertDialog 
                 title="Error"
                 content={error}

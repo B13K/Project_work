@@ -50,3 +50,14 @@
     justify-content: center;
     gap: 1rem;
 }
+
+.signUpButtons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 3rem;
+}
+
+.signUpButtons Button{
+    border-radius: 1rem;
+}

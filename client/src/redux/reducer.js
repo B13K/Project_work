@@ -11,10 +11,10 @@ import {
 
 const initialState = {
     sidebar: false,
-    user: {},
+    user: null,
     users: {},
-    roles: {},
-    lineas: {}
+    roles: [],
+    lineas: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -23,6 +23,8 @@ const reducer = (state = initialState, action) => {
             return {...state, sidebar:action.payload}
         case LOGIN:
             return {...state, user: action.payload}
+        case LOGOUT:
+            return {...state, user: null}
         default:
             return {...initialState}
     }

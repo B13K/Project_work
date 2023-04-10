@@ -1,0 +1,10 @@
+
+.profileContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profileContainer TextField {
+    padding: 1rem;
+}

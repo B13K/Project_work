@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import style from "./Sidebar.module.css"
 import { openSidebar } from "../../redux/actions"
+import LogoutButton from "../LogoutButton/LogoutButton"
 import {Link} from "react-router-dom"
 
 
@@ -39,6 +40,7 @@ const Sidebar = () => {
                 <Link to="/configuracion">Configuracion</Link>
                 <Link to="/auth/login">Login</Link>
                 <Link to="/auth/signup">SignUp</Link>
+                <LogoutButton/>
             </Drawer>
 
         </div>

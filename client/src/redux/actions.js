@@ -25,6 +25,12 @@ export const signUp = (newUser) => {
     }
 }
 
+export const logout = () => {
+    return {
+        type: LOGOUT,
+    }
+}
+
 export const openSidebar = (isOpen) => {
     return {
         type: SIDEBAR_OPEN,
