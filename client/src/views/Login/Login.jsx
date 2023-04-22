@@ -46,10 +46,10 @@ const Login = () => {
             setDialogOpen(true)
             return
         }
-        dispatch(login(data.data.user))
-        let user = {...data.data.user}
-        localStorage.setItem("token", JSON.stringify(data.data.token))
-        localStorage.setItem("user", JSON.stringify(user))
+        dispatch(login(data.data.user, data.data.token))
+        // let user = {...data.data.user}
+        // localStorage.setItem("token", JSON.stringify(data.data.token))
+        // localStorage.setItem("user", JSON.stringify(user))
         setLoginForm(initialLogin)
         navigate("/dashboard") //Para regresar al inicio despues del login
     }

@@ -1,10 +1,10 @@
 import store from "./redux/store"
+
 import { Provider } from "react-redux"
 import { createRoot } from "react-dom/client"
 import { BrowserRouter } from "react-router-dom"
 import "./main.css"
 import App from "./App"
-import { login } from "./redux/actions"
 
 
 const root = createRoot(document.getElementById("root"))
@@ -12,9 +12,10 @@ const root = createRoot(document.getElementById("root"))
 
 root.render(
     <Provider store={store}>
-        <BrowserRouter>
-            <App/>
-        </BrowserRouter>
+       
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
     </Provider>
 
 )

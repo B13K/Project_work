@@ -1,114 +1,83 @@
 import style from "./Profile.module.css"
 import { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
-import { Button, TextField, Select, MenuItem, Menu } from "@mui/material"
+import { Button, TextField, Select, MenuItem, Menu, Grid, Box } from "@mui/material"
+
+import TabPanel from "../../components/TabPanel/TabPanel"
+import ProfileHeader from "./components/header/ProfileHeader"
+import ProfileNavBar from "./components/NavBar/ProfileNavBar"
+import Grid2 from '@mui/material/Unstable_Grid2';
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import ProfileForm from "./components/ProfileForm/ProfileForm"
+import JBBox from "../../components/JBBox/JBBox"
+
+
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
+
 
 const Profile = () => {
-    const initialUser = {
-        name: "",
-        lastname: "",
-        email: "",
-        password: "",
-        nickname: "",
-        Rols: []
-    }
-    const newRol = {
-        id: undefined,
-    }
     
-    const user = useSelector(state => state.user)
-    // const roles = useSelector(state => state.roles)
 
-    const roles = [
-        {id:1, name:"admin"},
-        {id:2, name:"operador"},
-        {id:3, name:"Jefe"}
-    ]
-    const [userForm, setUserForm ] = useState(initialUser)
+    const [value, setValue] = useState(0);
+  
+    const handleChange = (event, newValue) => {
+      setValue(newValue);
+    };
 
-    
-    useEffect( () => {
-        if(user){
-            setUserForm({...user})
-        }
-    }, [user])
+    const user = useSelector( state => state.user)
 
-    const addRolHandler = (e) => {
-        setUserForm({...userForm, Rols: [...userForm.Rols, newRol]})
-    }
+    // useEffect( () => {
+    //     if(user){
 
-    const deleteRolHandler = (e) => {
-        const { id } = e.target
-        const newRoles = [...userForm.Rols].filter( (e,i ) => i !== Number(id))
-        setUserForm({
-            ...userForm,
-            Rols: newRoles
-        })
-    } 
-
-    const onChangeHandler = (e) => {
-        const {id, name, value } = e.target
-        if(id){
-            const roles = [...userForm.Rols]
-            roles[id].id = value
-            setUserForm({
-                ...userForm,
-                Rols: [...roles]
-            })
-            return
-        }
-        setUserForm({
-            ...userForm,
-            [name]: value
-        })
-
-    }
-
-
+    //     }
+    // }, [user])
 
 
     return (
-        <div>
-            <form className={style.profileContainer}>
-                <input  label="Nombre"
-                            id={undefined}
-                            name="name"
-                            value={userForm.name}
-                            onChange={onChangeHandler}
-                 />
-                <input  label="Apellido"
-                            id={undefined}
-                            name="lastname"
-                            value={userForm.lastname}
-                            onChange={onChangeHandler}
-                />
-                <input  label="Correo"
-                            id={undefined}
-                            name="email"
-                            value={userForm.email}
-                            onChange={onChangeHandler}
-                 />
-                <input  label="Nickname"
-                            id={undefined}
-                            name="nickname"
-                            value={userForm.nickname}
-                            onChange={onChangeHandler}
-                />
-                <Button onClick={addRolHandler}>Agregar Rol</Button>
-                {userForm.Rols?.map( (r, i) => (
-                    <div key={i}>
-                        <label>{i}</label>
-                        <select label="Rol" id={i} value={r.id} name={r.name} onChange={onChangeHandler}>
-                            {
-                                roles?.map((rol, index) => (
-                                    <option key={index} value={rol.id}>{rol.name}</option>
-                                ))
-                            }
-                        </select>                        
-                        <Button id={i} onClick={deleteRolHandler}>Eliminar</Button>
-                    </div>
-                ))}
-            </form>
+        <div className={style.profileContainer}>
+            <ProfileHeader>
+                <ProfileNavBar value={value} handleChange={handleChange}/>
+            </ProfileHeader>
+            <Box sx={{flexGrow: 1}}>
+                
+            <Grid2 container spacing={2}>
+                <Grid2 xs={12} md={6}>
+                    <Item sx={{height: "18rem"}}>
+                        <ProfileForm user={user} />
+                    </Item>      
+                </Grid2>
+                <Grid2 xs={12} md={6}>
+                    <Item sx={{height: "18rem"}}>
+                        <TabPanel value={value} index={0}>
+                            Item - {value}
+                        </TabPanel>
+                        <TabPanel value={value} index={1}>
+                            Item - {value}
+                        </TabPanel>
+                        <TabPanel value={value} index={2}>
+                            Item - {value}
+                        </TabPanel>
+                    </Item>
+                </Grid2>
+                <Grid2 xs={6}>
+                    <Item>
+                        xs-6
+                    </Item>
+                </Grid2>
+                <Grid2 xs={6}>
+                    <JBBox bgColor="primary" color="success" sx={{borderRadius: "2rem"}}>
+                        Hola
+                    </JBBox>
+                </Grid2>
+            </Grid2>
+            </Box>
         </div>
     )
 }

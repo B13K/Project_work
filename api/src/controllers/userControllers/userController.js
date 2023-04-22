@@ -68,24 +68,37 @@ const addUser = async (name, lastname, email, nickname, rol, linea) => {
     return newUser
 }
 
-const modifyUser = async (id, name, lastname, email, password, newPassword, nickname, rol, linea) => {
-    const user = await User.findByPk(id)
+const modifyUser = async (id, name, lastname, email, nickname, rol, linea) => {
+    const user = await User.findByPk(id, {
+        attributes: attr,
+        include: [
+            {
+                model: Rol,
+                through: {
+                    attributes: []
+                }
+            },
+            {
+                model: Linea,
+                throught: {
+                    attributes: []
+                }
+            }
+        ]
+    })
 
     if(!user) throw Error(`El id = ${id}, no existe`)
-
     user.set({
         name: name,
         lastname: lastname,
         email: email,
-        password: await createHash(password),
         nickname: nickname,
     })
-
+    
     await user.save();
-    console.log(rol)
     if(rol) await user.setRols(rol);
     if(linea) await user.setLineas(linea);
-
+    
     return user
 }
 

@@ -1,0 +1,28 @@
+
+.profileHeaderContainer {
+    /* margin-top: 2rem; */
+    /* width: 95vw; */
+    height: 20rem;
+    background-image: url(../../../../../images/curved0.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    /* margin: 0 1rem; */
+    /* z-index: -100; */
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    border-radius: 2rem;
+    margin-bottom: 4rem; /* Este espacio es para que el contenido no este debajo del navbar*/
+}
+
+
+.profileHeaderPath {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+

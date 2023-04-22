@@ -1,4 +1,4 @@
-const { User, Rol } = require("../../db.js")
+const { User, Rol, Linea } = require("../../db.js")
 const { createHash, checkPassword } = require("../../utils/bcrypt.js")
 const { createToken } = require("../../middleware/authJWT.js")
 
@@ -15,6 +15,12 @@ const login = async (email, password) => {
             {
                 model: Rol,
                 through: {
+                    attributes: []
+                }
+            },
+            {
+                model: Linea,
+                throught: {
                     attributes: []
                 }
             }
@@ -39,6 +45,7 @@ const login = async (email, password) => {
         Rols: user.Rols
     }
     const token = await createToken(user)
+    console.log(user)
     return {user: data, token};
 }
 

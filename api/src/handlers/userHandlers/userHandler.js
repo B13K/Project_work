@@ -44,10 +44,10 @@ const createUserHandler = async (req, res) => {
 }
 
 const modifyUserHandler = async (req, res) => {
-    const {id, name, lastname, email, password, newPassword, nickname, rol, linea} = req.body
+    const {id, name, lastname, email, nickname, rol, linea} = req.body
 
     try{
-        const user = await modifyUser(id, name, lastname, email, password, newPassword, nickname, rol, linea);
+        const user = await modifyUser(id, name, lastname, email, nickname, rol, linea);
         return res.status(200).json(user)
     } catch (error) {
         return res.status(400).json({error: error.message})

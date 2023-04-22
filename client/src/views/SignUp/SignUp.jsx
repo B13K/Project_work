@@ -46,9 +46,9 @@ const SignUp = () => {
             setOpen(true)
             return
         }
-        dispatch(signUp(data.data.user))
-        localStorage.setItem("token", data.data.token)
-        loscalStorage.setItem("user", data.data.user)
+        dispatch(signUp(data.data.user, data.data.token))
+        // localStorage.setItem("token", data.data.token)
+        // loscalStorage.setItem("user", data.data.user)
         setUserForm(initialUser)
         navigate("/dashboard")
 

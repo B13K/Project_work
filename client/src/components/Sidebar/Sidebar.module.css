@@ -1,6 +1,17 @@
-
+/* 
 .sidebarContainer {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+} */
+
+.sidebarDrawerHeader {
+    margin: 1rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+.DrawerHeaderLogo {
+    width: 100px;
+    
 }

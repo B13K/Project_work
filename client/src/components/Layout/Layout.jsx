@@ -14,6 +14,8 @@ import Profile from "../../views/Profile/Profile";
 import Configuration from "../../views/Configuration/Configuration.jsx"
 import ProtectedRoute from "../../ProtectedRoute";
 
+import routes from "../../routes.jsx"
+
 const Layout = () => {
 
     const dispatch = useDispatch()
@@ -26,22 +28,29 @@ const Layout = () => {
         }
         
     }
+    
+
+    const getRoutes = (routers) => routers.map((route) => {
+        if(route.isProtected){
+            return (<Route key={route.key} element={<ProtectedRoute />}>
+                <Route path={route.path} element={route.component} />
+            </Route>)
+        } 
+        return (<Route path={route.path} element={route.component} key={route.key} />)
+    
+    })
+         
+    
 
     return(
         <Box className={style.layoutContainer} onClick={onClickHandler}>
-           {(location !== "auth") && <NavBar/>}
+           {!((location === "auth") || (location === "profile")) && <NavBar/>}
            {/* <NavBar/> */}
             <Routes>
-                <Route element={<ProtectedRoute/>}>
-                    <Route path="/dashboard" element={<Dashboard/>}/>
-                </Route>
-                <Route path="/profile" element={<Profile/>} />
-                <Route path="/configuracion" element={<Configuration/>}/>
-                <Route path="/auth/login" element={<Login/>} />
-                <Route path="/auth/signup" element={<SignUp/>} />
-                <Route path="*" element={<Navigate to="/dashboard"/>}/>
+                {getRoutes(routes)}
+                <Route path="/" element={<Navigate to="/dashboard" />}/>
             </Routes>
-            <Sidebar/>
+            <Sidebar routes={routes}/>
         </Box>
     )
 

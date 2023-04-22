@@ -24,8 +24,6 @@ const LogoutButton = () => {
 
 
     const logoutHandler = () => {
-        localStorage.removeItem("token")
-        localStorage.removeItem("user")
         dispatch(logout())
         if(location.pathname === "/dashboard"){
             return
